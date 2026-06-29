@@ -1,1 +1,16 @@
-
+[
+  {
+    "id": "ZAMIL-R129530",
+    "status": "VALID",
+    "certificateNumber": "ZAMIL-R129530",
+    "equipmentNo": "EC180109",
+    "equipment": "Mobile Crane",
+    "manufacturer": "XCMG",
+    "model": "XCT80",
+    "serialNumber": "A010695",
+    "capacity": "80 Ton",
+    "inspectionDate": "16-Aug-2025",
+    "expiryDate": "15-Nov-2025",
+    "pdf": "certificates/ZAMIL-R129530.pdf"
+  }
+]
