@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TUV CENTER - Certificate Verification</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+header{
+background:#0A2D73;
+color:#fff;
+padding:25px;
+text-align:center;
+}
+
+header h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+header p{
+font-size:18px;
+}
+
+.container{
+
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:40px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,.15);
+
+}
+
+input{
+
+width:100%;
+padding:18px;
+font-size:18px;
+border:2px solid #ddd;
+border-radius:10px;
+margin-top:20px;
+
+}
+
+button{
+
+margin-top:20px;
+width:100%;
+padding:18px;
+background:#0A2D73;
+color:white;
+border:none;
+font-size:20px;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#F7931E;
+
+}
+
+.footer{
+
+margin-top:80px;
+padding:20px;
+text-align:center;
+color:#666;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>TUV CENTER</h1>
+
+<p>Calibration / Inspection Certificate Verification</p>
+
+</header>
+
+<div class="container">
+
+<h2>Verify Certificate</h2>
+
+<input
+id="certificate"
+placeholder="Enter Certificate Number">
+
+<button onclick="verify()">
+
+VERIFY
+
+</button>
+
+</div>
+
+<div class="footer">
+
+© 2026 TUV CENTER
+
+</div>
+
+<script>
+
+function verify(){
+
+let no=document.getElementById("certificate").value.trim();
+
+if(no==""){
+
+alert("Please enter Certificate Number");
+
+return;
+
+}
+
+window.location.href="certificate.html?id="+no;
+
+}
+
+</script>
+
+</body>
+</html>
