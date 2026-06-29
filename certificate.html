@@ -3,171 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Certificate Verification</title>
+<title>TUV CENTER - Certificate Verification</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
 body{
-background:#f4f7fb;
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
 }
-
 header{
-background:#0A2D73;
-color:white;
-padding:25px;
-text-align:center;
+    background:#0A2D73;
+    color:#fff;
+    padding:20px;
+    text-align:center;
 }
-
-.card{
-
-max-width:900px;
-margin:40px auto;
-background:white;
-padding:40px;
-border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,.15);
-
+.container{
+    max-width:900px;
+    margin:30px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.15);
 }
-
 table{
-
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-
+    width:100%;
+    border-collapse:collapse;
 }
-
 td{
-
-padding:15px;
-border-bottom:1px solid #ddd;
-
+    padding:12px;
+    border-bottom:1px solid #ddd;
 }
-
-.label{
-
-font-weight:bold;
-width:35%;
-
+.title{
+    font-weight:bold;
+    width:35%;
 }
-
-.status{
-
-background:#28a745;
-color:white;
-padding:10px;
-border-radius:8px;
-display:inline-block;
-font-weight:bold;
-
+.valid{
+    color:green;
+    font-weight:bold;
 }
-
-.btn{
-
-display:inline-block;
-margin-top:30px;
-padding:15px 25px;
-background:#0A2D73;
-color:white;
-text-decoration:none;
-border-radius:8px;
-
+.expired{
+    color:red;
+    font-weight:bold;
 }
-
-.btn:hover{
-
-background:#F7931E;
-
+.button{
+    display:inline-block;
+    margin-top:20px;
+    background:#0A2D73;
+    color:#fff;
+    padding:12px 25px;
+    text-decoration:none;
+    border-radius:8px;
 }
-
 </style>
 
 </head>
-
 <body>
 
 <header>
-
 <h1>TUV CENTER</h1>
-
 <p>Certificate Verification</p>
-
 </header>
 
-<div class="card">
+<div class="container">
 
-<h2>Inspection Certificate</h2>
+<h2 id="certTitle"></h2>
 
 <table>
 
-<tr>
-<td class="label">Certificate No.</td>
-<td id="cert"></td>
-</tr>
-
-<tr>
-<td class="label">Equipment No.</td>
-<td>EC180109</td>
-</tr>
-
-<tr>
-<td class="label">Equipment</td>
-<td>Mobile Crane</td>
-</tr>
-
-<tr>
-<td class="label">Manufacturer</td>
-<td>XCMG</td>
-</tr>
-
-<tr>
-<td class="label">Model</td>
-<td>XCT80</td>
-</tr>
-
-<tr>
-<td class="label">Serial Number</td>
-<td>A010695</td>
-</tr>
-
-<tr>
-<td class="label">Capacity</td>
-<td>80 Ton</td>
-</tr>
-
-<tr>
-<td class="label">Inspection Date</td>
-<td>16-Aug-2025</td>
-</tr>
-
-<tr>
-<td class="label">Expiry Date</td>
-<td>15-Nov-2025</td>
-</tr>
-
-<tr>
-<td class="label">Status</td>
-<td><span class="status">VALID</span></td>
-</tr>
+<tr><td class="title">Certificate No.</td><td id="certificateNumber"></td></tr>
+<tr><td class="title">Equipment No.</td><td id="equipmentNo"></td></tr>
+<tr><td class="title">Equipment</td><td id="equipment"></td></tr>
+<tr><td class="title">Manufacturer</td><td id="manufacturer"></td></tr>
+<tr><td class="title">Model</td><td id="model"></td></tr>
+<tr><td class="title">Serial Number</td><td id="serialNumber"></td></tr>
+<tr><td class="title">Capacity</td><td id="capacity"></td></tr>
+<tr><td class="title">Inspection Date</td><td id="inspectionDate"></td></tr>
+<tr><td class="title">Expiry Date</td><td id="expiryDate"></td></tr>
+<tr><td class="title">Status</td><td id="status"></td></tr>
 
 </table>
 
-<a class="btn" href="#">View Original Certificate</a>
+<a id="pdfLink" class="button" target="_blank">
+View Original Certificate
+</a>
 
 </div>
 
 <script>
 
-const p=new URLSearchParams(window.location.search);
+const id=new URLSearchParams(location.search).get("id");
 
-document.getElementById("cert").innerHTML=p.get("id");
+fetch("certificates.json")
+.then(r=>r.json())
+.then(data=>{
+
+const cert=data.find(x=>x.id===id);
+
+if(!cert){
+
+document.body.innerHTML="<h1 style='text-align:center;margin-top:80px'>Certificate Not Found</h1>";
+
+return;
+
+}
+
+document.getElementById("certTitle").innerText=cert.certificateNumber;
+document.getElementById("certificateNumber").innerText=cert.certificateNumber;
+document.getElementById("equipmentNo").innerText=cert.equipmentNo;
+document.getElementById("equipment").innerText=cert.equipment;
+document.getElementById("manufacturer").innerText=cert.manufacturer;
+document.getElementById("model").innerText=cert.model;
+document.getElementById("serialNumber").innerText=cert.serialNumber;
+document.getElementById("capacity").innerText=cert.capacity;
+document.getElementById("inspectionDate").innerText=cert.inspectionDate;
+document.getElementById("expiryDate").innerText=cert.expiryDate;
+
+document.getElementById("status").innerHTML=
+cert.status=="VALID"
+?'<span class="valid">VALID</span>'
+:'<span class="expired">EXPIRED</span>';
+
+document.getElementById("pdfLink").href=cert.pdf;
+
+});
 
 </script>
 
