@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate Verification</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+header{
+background:#0A2D73;
+color:white;
+padding:25px;
+text-align:center;
+}
+
+.card{
+
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:40px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,.15);
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+
+}
+
+td{
+
+padding:15px;
+border-bottom:1px solid #ddd;
+
+}
+
+.label{
+
+font-weight:bold;
+width:35%;
+
+}
+
+.status{
+
+background:#28a745;
+color:white;
+padding:10px;
+border-radius:8px;
+display:inline-block;
+font-weight:bold;
+
+}
+
+.btn{
+
+display:inline-block;
+margin-top:30px;
+padding:15px 25px;
+background:#0A2D73;
+color:white;
+text-decoration:none;
+border-radius:8px;
+
+}
+
+.btn:hover{
+
+background:#F7931E;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>TUV CENTER</h1>
+
+<p>Certificate Verification</p>
+
+</header>
+
+<div class="card">
+
+<h2>Inspection Certificate</h2>
+
+<table>
+
+<tr>
+<td class="label">Certificate No.</td>
+<td id="cert"></td>
+</tr>
+
+<tr>
+<td class="label">Equipment No.</td>
+<td>EC180109</td>
+</tr>
+
+<tr>
+<td class="label">Equipment</td>
+<td>Mobile Crane</td>
+</tr>
+
+<tr>
+<td class="label">Manufacturer</td>
+<td>XCMG</td>
+</tr>
+
+<tr>
+<td class="label">Model</td>
+<td>XCT80</td>
+</tr>
+
+<tr>
+<td class="label">Serial Number</td>
+<td>A010695</td>
+</tr>
+
+<tr>
+<td class="label">Capacity</td>
+<td>80 Ton</td>
+</tr>
+
+<tr>
+<td class="label">Inspection Date</td>
+<td>16-Aug-2025</td>
+</tr>
+
+<tr>
+<td class="label">Expiry Date</td>
+<td>15-Nov-2025</td>
+</tr>
+
+<tr>
+<td class="label">Status</td>
+<td><span class="status">VALID</span></td>
+</tr>
+
+</table>
+
+<a class="btn" href="#">View Original Certificate</a>
+
+</div>
+
+<script>
+
+const p=new URLSearchParams(window.location.search);
+
+document.getElementById("cert").innerHTML=p.get("id");
+
+</script>
+
+</body>
+</html>
